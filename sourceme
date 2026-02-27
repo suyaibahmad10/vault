@@ -1,0 +1,21 @@
+# create a virtual environment in this directory if it doesn't exist
+if [ ! -d "venv" ]; then
+    echo "Creating virtual environment..."
+    python3 -m venv venv
+fi
+
+# activate the virtual environment
+# shellcheck source=/dev/null
+if [ -f "venv/bin/activate" ]; then
+    . "venv/bin/activate"
+fi
+
+# TODO: Not a best practice but still need to do
+export VAULT_TOKEN=root
+export VAULT_ADDR="http://127.0.0.1:8200"
+
+# install requirements from requirements.txt if present
+if [ -f "requirements.txt" ]; then
+    echo "Installing dependencies from requirements.txt..."
+    pip install -r requirements.txt
+fi
